@@ -20,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +39,7 @@ public class ModerationFilter extends MemberMessageFilter {
     private MessageService messageService;
 
     @Autowired
+    @Lazy
     private MuteService muteService;
 
     @Override

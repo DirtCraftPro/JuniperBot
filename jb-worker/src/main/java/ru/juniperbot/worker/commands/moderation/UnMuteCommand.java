@@ -20,6 +20,7 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import ru.juniperbot.common.worker.command.model.BotContext;
 import ru.juniperbot.common.worker.command.model.DiscordCommand;
 import ru.juniperbot.common.worker.command.model.MemberReference;
@@ -33,6 +34,7 @@ import ru.juniperbot.common.worker.modules.moderation.service.MuteService;
 public class UnMuteCommand extends MentionableModeratorCommand {
 
     @Autowired
+    @Lazy
     private MuteService muteService;
 
     protected UnMuteCommand() {
