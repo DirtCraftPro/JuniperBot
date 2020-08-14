@@ -74,7 +74,7 @@ public class GulagCommand extends MentionableCommand {
                 ? String.format("%s#%s (%s)", targetUser.getName(), targetUser.getDiscriminator(), id)
                 : id;
 
-        boolean success = gulagService.send(event.getMember(), Long.valueOf(reference.getId()), content);
+        boolean success = gulagService.send(event.getMember(), Long.parseLong(reference.getId()), content);
         if (!success) {
             messageService.onEmbedMessage(channel, "discord.command.gulag.exists", targetName);
             return false;

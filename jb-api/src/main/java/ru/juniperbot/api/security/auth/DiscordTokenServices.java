@@ -55,12 +55,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Slf4j
-@SuppressWarnings("unchecked")
 public class DiscordTokenServices implements ResourceServerTokenServices {
 
     private final OAuth2ProtectedResourceDetails resource;
 
-    private Map<String, OAuth2RestTemplate> restTemplates = new ConcurrentHashMap<>();
+    private final Map<String, OAuth2RestTemplate> restTemplates = new ConcurrentHashMap<>();
 
     @Autowired
     private CommonProperties commonProperties;
@@ -76,7 +75,7 @@ public class DiscordTokenServices implements ResourceServerTokenServices {
     @Getter
     private FixedAuthoritiesExtractor authoritiesExtractor = new FixedAuthoritiesExtractor();
 
-    private LoadingCache<String, List<DiscordGuildDetails>> guilds = CacheBuilder.newBuilder()
+    private final LoadingCache<String, List<DiscordGuildDetails>> guilds = CacheBuilder.newBuilder()
             .concurrencyLevel(4)
             .maximumSize(10000)
             .expireAfterWrite(1, TimeUnit.MINUTES)
@@ -161,7 +160,6 @@ public class DiscordTokenServices implements ResourceServerTokenServices {
         return getCurrentGuilds(false).stream().filter(e -> Objects.equals(idStr, e.getId())).findFirst().orElse(null);
     }
 
-    @SuppressWarnings("unchecked")
     private <T> T executeRequest(Class<T> clazz, String path, String accessToken) {
         if (log.isDebugEnabled()) {
             log.debug("Getting user info from: " + path);

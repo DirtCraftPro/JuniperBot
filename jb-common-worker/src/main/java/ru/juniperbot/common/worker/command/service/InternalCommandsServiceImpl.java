@@ -57,8 +57,8 @@ public class InternalCommandsServiceImpl extends BaseCommandsService implements 
     @Autowired
     private DiscordMetricsRegistry registry;
 
-    private Cache<Long, BotContext> contexts = CacheBuilder.newBuilder()
-            .expireAfterAccess(1, TimeUnit.DAYS)
+    private final Cache<Long, BotContext> contexts = CacheBuilder.newBuilder()
+            .expireAfterAccess(6, TimeUnit.HOURS)
             .build();
 
     private Meter executions;
@@ -93,7 +93,8 @@ public class InternalCommandsServiceImpl extends BaseCommandsService implements 
             return true;
         }
 
-        CommandConfig commandConfig = event.getGuild() != null ? commandConfigService.findByKey(event.getGuild().getIdLong(), rawKey) : null;
+        event.getGuild();
+        CommandConfig commandConfig = commandConfigService.findByKey(event.getGuild().getIdLong(), rawKey);
         if (!isApplicable(command, commandConfig, event.getAuthor(), event.getMember(), channel)) {
             return false;
         }

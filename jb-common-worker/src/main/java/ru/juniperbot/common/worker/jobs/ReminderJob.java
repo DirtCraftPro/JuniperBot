@@ -70,7 +70,7 @@ public class ReminderJob extends AbstractJob {
         }
 
         Guild guild = shardManager.getGuildById(guildId);
-        if (guild == null || !guild.isAvailable()) {
+        if (guild == null || guild.getJDA().isUnavailable(guild.getIdLong())) {
             return;
         }
 

@@ -21,22 +21,18 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-@SuppressWarnings("unchecked")
 public class LocaleUtils {
 
     private LocaleUtils() {
     }
 
     static {
-        Map<String, Locale> localeMap = new HashMap<>();
-        localeMap.put(LocaleUtils.DEFAULT_LOCALE, Locale.US);
-        localeMap.put(LocaleUtils.RU_LOCALE, Locale.forLanguageTag("ru-RU"));
-        SUPPORTED_LOCALES = Collections.unmodifiableMap(localeMap);
+        SUPPORTED_LOCALES = Map.of(LocaleUtils.DEFAULT_LOCALE, Locale.forLanguageTag("ru-RU"), LocaleUtils.RU_LOCALE, Locale.US);
     }
 
-    public static final String DEFAULT_LOCALE = "en";
+    public static final String DEFAULT_LOCALE = "ru";
 
-    public static final String RU_LOCALE = "ru";
+    public static final String RU_LOCALE = "en";
 
     public static Map<String, Locale> SUPPORTED_LOCALES;
 

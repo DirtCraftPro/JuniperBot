@@ -42,7 +42,7 @@ public class ServersController extends BaseRestController {
         ServersDto result = new ServersDto();
         result.setGuilds(apiMapperService.getGuildDtos(detailsList));
         result.getGuilds().forEach(e -> {
-            GuildDto guild = gatewayService.getGuildInfo(Long.valueOf(e.getId()));
+            GuildDto guild = gatewayService.getGuildInfo(Long.parseLong(e.getId()));
             if (guild != null) {
                 e.setAdded(true);
                 e.setMembers(guild.getOnlineCount());

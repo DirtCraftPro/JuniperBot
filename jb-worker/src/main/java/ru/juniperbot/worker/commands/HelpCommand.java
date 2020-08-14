@@ -31,6 +31,7 @@ import ru.juniperbot.common.worker.command.model.AbstractCommand;
 import ru.juniperbot.common.worker.command.model.BotContext;
 import ru.juniperbot.common.worker.command.model.DiscordCommand;
 import ru.juniperbot.common.worker.command.service.CommandsHolderService;
+import ru.juniperbot.common.worker.shared.service.SupportService;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -62,16 +63,16 @@ public class HelpCommand extends AbstractCommand {
 
         Map<String, CommandConfig> configMap = commandConfigService.findAllMap(context.getConfig().getGuildId());
 
-        List<DiscordCommand> discordCommands = holderService.getCommands().entrySet().stream()
-                .filter(e -> {
-                    CommandConfig config = configMap.get(e.getValue().getClass()
+        List<DiscordCommand> discordCommands = holderService.getCommands().values().stream()
+                .filter(command -> {
+                    CommandConfig config = configMap.get(command.getClass()
                             .getAnnotation(DiscordCommand.class).key());
-                    return commandsService.isApplicable(e.getValue(), config, message.getAuthor(), message.getMember(), message.getChannel())
+                    return commandsService.isApplicable(command, config, message.getAuthor(), message.getMember(), message.getChannel())
                             && !commandsService.isRestricted(config, message.getChannel())
                             && !commandsService.isRestricted(config, message.getMember());
 
                 })
-                .map(e -> e.getValue().getClass().getAnnotation(DiscordCommand.class))
+                .map(command -> command.getClass().getAnnotation(DiscordCommand.class))
                 .filter(e -> !e.hidden())
                 .collect(Collectors.toList());
 
@@ -147,13 +148,12 @@ public class HelpCommand extends AbstractCommand {
         }
 
         if (direct) {
-            if (message.getAuthor() != null) {
-                try {
-                    message.getAuthor().openPrivateChannel()
-                            .queue(channel -> send(message, channel, embedBuilder, true));
-                } catch (Exception e) {
-                    log.warn("Could not open private channel for {}", message.getAuthor(), e);
-                }
+            message.getAuthor();
+            try {
+                message.getAuthor().openPrivateChannel()
+                        .queue(channel -> send(message, channel, embedBuilder, true));
+            } catch (Exception e) {
+                log.warn("Could not open private channel for {}", message.getAuthor(), e);
             }
         } else {
             send(message, message.getChannel(), embedBuilder, false);
@@ -163,7 +163,8 @@ public class HelpCommand extends AbstractCommand {
 
     private void send(GuildMessageReceivedEvent message, MessageChannel channel, EmbedBuilder embedBuilder, boolean direct) {
         channel.sendMessage(embedBuilder.build()).queue();
-        if (direct && message.getAuthor() != null) {
+        if (direct) {
+            message.getAuthor();
             contextService.withContext(message.getGuild(), () -> {
                 messageService.onMessage(message.getChannel(), "discord.command.help.sent", message.getAuthor().getAsMention());
             });
