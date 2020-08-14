@@ -31,6 +31,7 @@ import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.ResumedEvent;
 import net.dv8tion.jda.api.hooks.IEventManager;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.RestAction;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
@@ -95,7 +96,7 @@ public class DiscordServiceImpl extends ListenerAdapter implements DiscordServic
         Objects.requireNonNull(token, "No Discord Token specified");
         try {
             RestAction.setPassContext(false);
-            DefaultShardManagerBuilder builder = new DefaultShardManagerBuilder()
+            DefaultShardManagerBuilder builder = DefaultShardManagerBuilder.create(GatewayIntent.getIntents(GatewayIntent.ALL_INTENTS))
                     .setToken(token)
                     .setEventManagerProvider(id -> eventManager)
                     .addEventListeners(this)

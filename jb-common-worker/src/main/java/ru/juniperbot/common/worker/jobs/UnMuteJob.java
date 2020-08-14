@@ -67,7 +67,7 @@ public class UnMuteJob extends AbstractJob {
 
         Guild guild = shardManager.getGuildById(guildId);
         if (guild != null) {
-            if (!guild.isAvailable()) {
+            if (guild.getJDA().isUnavailable(guild.getIdLong())) {
                 reschedule(jobExecutionContext, TimeUnit.MINUTES, 1);
                 return;
             }

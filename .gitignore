@@ -8,6 +8,7 @@ out/
 /logs/*
 /application.yml
 *.log
+application.properties
 
 ### Worker ###
 /jb-worker/application.yml
@@ -38,3 +39,5 @@ out/
 /dist/
 /nbdist/
 /.nb-gradle/
+/jb-common/src/main/generated/
+/jb-api/src/main/generated/

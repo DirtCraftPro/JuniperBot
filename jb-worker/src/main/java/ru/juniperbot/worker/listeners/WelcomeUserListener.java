@@ -21,6 +21,7 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberLeaveEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -181,8 +182,8 @@ public class WelcomeUserListener extends DiscordEventListener {
     }
 
     @Override
-    public void onGuildMemberLeave(GuildMemberLeaveEvent event) {
-        if (event.getUser().isBot()) {
+    public void onGuildMemberRemove(GuildMemberRemoveEvent event) {
+        if (event.getMember() != null && event.getMember().getUser().isBot()) {
             return;
         }
         Guild guild = event.getGuild();

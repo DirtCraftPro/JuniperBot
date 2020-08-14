@@ -27,12 +27,14 @@ import net.dv8tion.jda.api.events.guild.GuildBanEvent;
 import net.dv8tion.jda.api.events.guild.GuildUnbanEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberLeaveEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.events.guild.member.update.GuildMemberUpdateNicknameEvent;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceLeaveEvent;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceMoveEvent;
 import net.dv8tion.jda.api.events.user.update.UserUpdateOnlineStatusEvent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.transaction.annotation.Transactional;
 import ru.juniperbot.common.model.AuditActionType;
 import ru.juniperbot.common.model.ModerationActionType;
@@ -70,6 +72,7 @@ public class MemberListener extends DiscordEventListener {
     private UserService userService;
 
     @Autowired
+    @Lazy
     private MuteService muteService;
 
     @Autowired
@@ -170,8 +173,8 @@ public class MemberListener extends DiscordEventListener {
 
     @Override
     @Transactional
-    public void onGuildMemberLeave(GuildMemberLeaveEvent event) {
-        if (event.getMember().getUser().isBot()) {
+    public void onGuildMemberRemove(GuildMemberRemoveEvent event) {
+        if (event.getMember() != null && event.getMember().getUser().isBot()) {
             return;
         }
         LocalMember member = entityAccessor.getOrCreate(event.getMember());
