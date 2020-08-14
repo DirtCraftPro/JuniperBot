@@ -50,7 +50,7 @@ import static ru.juniperbot.common.worker.modules.audit.provider.ModerationAudit
 @Service
 public class MuteServiceImpl implements MuteService {
 
-    private final static String MUTED_ROLE_NAME = "JB-MUTED";
+    private final static String MUTED_ROLE_NAME = "MUTED";
 
     private enum PermissionMode {
         DENY, ALLOW, UNCHECKED

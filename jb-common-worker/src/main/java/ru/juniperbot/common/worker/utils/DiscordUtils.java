@@ -68,7 +68,7 @@ public final class DiscordUtils {
     public static Member findMember(@NonNull Guild guild, String name, String discriminator) {
         return guild.getMembersByName(name, true)
                 .stream()
-                .filter(m -> m.getUser() != null && m.getUser().getDiscriminator().equals(discriminator))
+                .filter(m -> m.getUser().getDiscriminator().equals(discriminator))
                 .findFirst()
                 .orElse(null);
 
@@ -267,7 +267,6 @@ public final class DiscordUtils {
                 .replaceAll("\u0000", ""));
         String attachmentsPart = message.getAttachments().stream()
                 .map(Message.Attachment::getUrl)
-                .filter(Objects::nonNull)
                 .collect(Collectors.joining(",\n"));
         if (StringUtils.isNotEmpty(attachmentsPart)) {
             if (builder.length() > 0) {

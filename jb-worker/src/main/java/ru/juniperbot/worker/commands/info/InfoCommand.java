@@ -69,7 +69,7 @@ public class InfoCommand extends AbstractInfoCommand {
 
         builder.addField(
                 messageService.getMessage("discord.command.info.author.title"),
-                messageService.getMessage("about.support.owner"), true);
+                messageService.getMessage("about.support.developer"), true);
 
         DateTimeFormatter formatter = DateTimeFormat
                 .mediumDateTime()
