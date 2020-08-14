@@ -1,5 +1,4 @@
-FROM openjdk:11.0.5-jre-stretch
-MAINTAINER Caramel <goldrenard@gmail.com>
+FROM openjdk:11.0.6-jre-stretch
 RUN mkdir -p /JuniperBot/logs /JuniperBot/temp
 WORKDIR /JuniperBot
 COPY build/libs/JuniperBot-Worker.jar JuniperBot-Worker.jar
