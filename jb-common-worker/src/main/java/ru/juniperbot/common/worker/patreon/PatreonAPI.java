@@ -74,14 +74,11 @@ public class PatreonAPI {
     public List<Member> fetchAllMembers(String campaignId, Collection<Member.MemberField> optionalFields) {
         Set<Member> members = new HashSet<>();
         String cursor = null;
-        while (true) {
+        do {
             JSONAPIDocument<List<Member>> membersPage = fetchPageOfMember(campaignId, 15, cursor, optionalFields);
             members.addAll(membersPage.get());
             cursor = getNextCursorFromDocument(membersPage);
-            if (cursor == null) {
-                break;
-            }
-        }
+        } while (cursor != null);
         return new ArrayList<>(members);
     }
 
@@ -109,7 +106,7 @@ public class PatreonAPI {
         addFieldsParam(builder, Member.class, optionalMemberAndDefaultFields);
         addFieldsParam(builder, User.class, User.UserField.getDefaultFields());
 
-        return execute(builder, new ParameterizedTypeReference<JSONAPIDocument<List<Member>>>() {
+        return execute(builder, new ParameterizedTypeReference<>() {
         });
     }
 
@@ -121,7 +118,7 @@ public class PatreonAPI {
                 type).getBody();
     }
 
-    private String getNextCursorFromDocument(JSONAPIDocument document) {
+    private String getNextCursorFromDocument(JSONAPIDocument<List<Member>> document) {
         Links links = document.getLinks();
         if (links == null) {
             return null;

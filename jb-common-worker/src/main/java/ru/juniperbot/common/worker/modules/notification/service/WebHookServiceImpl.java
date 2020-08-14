@@ -32,6 +32,7 @@ import ru.juniperbot.common.utils.CommonUtils;
 import ru.juniperbot.common.worker.shared.service.DiscordService;
 import ru.juniperbot.common.worker.utils.DiscordUtils;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -46,13 +47,14 @@ public class WebHookServiceImpl implements WebHookService {
     @Autowired
     private WebHookRepository repository;
 
-    private LoadingCache<Guild, List<Webhook>> webHooks = CacheBuilder.newBuilder()
+    private final LoadingCache<Guild, List<Webhook>> webHooks = CacheBuilder.newBuilder()
             .concurrencyLevel(4)
             .weakKeys()
             .maximumSize(100)
             .expireAfterWrite(1, TimeUnit.MINUTES)
             .build(
-                    new CacheLoader<Guild, List<Webhook>>() {
+                    new CacheLoader<>() {
+                        @ParametersAreNonnullByDefault
                         public List<Webhook> load(Guild guild) {
                             return guild.retrieveWebhooks().complete();
                         }

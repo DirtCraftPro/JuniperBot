@@ -56,7 +56,7 @@ public class JsonTypeDescriptor
     }
 
     public JsonTypeDescriptor() {
-        super(Object.class, new MutableMutabilityPlan<Object>() {
+        super(Object.class, new MutableMutabilityPlan<>() {
             private static final long serialVersionUID = 1606718143878984537L;
 
             @Override

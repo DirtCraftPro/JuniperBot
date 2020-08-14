@@ -68,7 +68,7 @@ public class TextConverter
         limitCheck = true;
         sectionStarted = false;
         hasImage = false;
-        sections = new LinkedList<Integer>();
+        sections = new LinkedList<>();
         return super.before(node);
     }
 

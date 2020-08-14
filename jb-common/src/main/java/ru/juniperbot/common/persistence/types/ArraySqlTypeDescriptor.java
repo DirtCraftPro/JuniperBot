@@ -45,10 +45,9 @@ public class ArraySqlTypeDescriptor
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public <X> ValueBinder<X> getBinder(
             JavaTypeDescriptor<X> javaTypeDescriptor) {
-        return new BasicBinder<X>(javaTypeDescriptor, this) {
+        return new BasicBinder<>(javaTypeDescriptor, this) {
             @Override
             protected void doBind(
                     PreparedStatement st,
@@ -91,7 +90,7 @@ public class ArraySqlTypeDescriptor
     @Override
     public <X> ValueExtractor<X> getExtractor(
             final JavaTypeDescriptor<X> javaTypeDescriptor) {
-        return new BasicExtractor<X>(javaTypeDescriptor, this) {
+        return new BasicExtractor<>(javaTypeDescriptor, this) {
             @Override
             protected X doExtract(
                     ResultSet rs,

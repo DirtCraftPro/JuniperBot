@@ -40,7 +40,7 @@ public class GatewayServiceImpl implements GatewayService {
     @Override
     public GuildDto getGuildInfo(long guildId) {
         GuildDto dto = template.convertSendAndReceiveAsType(QUEUE_GUILD_INFO_REQUEST, guildId,
-                new ParameterizedTypeReference<GuildDto>() {
+                new ParameterizedTypeReference<>() {
                 });
         return dto != null && dto.getId() != null ? dto : null;
     }
@@ -53,21 +53,21 @@ public class GatewayServiceImpl implements GatewayService {
     @Override
     public List<CommandInfo> getCommandList() {
         return template.convertSendAndReceiveAsType(QUEUE_COMMAND_LIST_REQUEST, "1",
-                new ParameterizedTypeReference<List<CommandInfo>>() {
+                new ParameterizedTypeReference<>() {
                 });
     }
 
     @Override
     public StatusDto getWorkerStatus() {
         return template.convertSendAndReceiveAsType(QUEUE_STATUS_REQUEST, "1",
-                new ParameterizedTypeReference<StatusDto>() {
+                new ParameterizedTypeReference<>() {
                 });
     }
 
     @Override
     public WebhookDto getWebhook(WebhookRequest request) {
         WebhookDto dto = template.convertSendAndReceiveAsType(QUEUE_WEBHOOK_GET_REQUEST, request,
-                new ParameterizedTypeReference<WebhookDto>() {
+                new ParameterizedTypeReference<>() {
                 });
         return dto != null && dto.getId() != null ? dto : null;
     }

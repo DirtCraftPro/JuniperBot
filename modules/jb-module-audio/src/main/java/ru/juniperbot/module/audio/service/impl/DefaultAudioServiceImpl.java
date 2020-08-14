@@ -69,7 +69,7 @@ public class DefaultAudioServiceImpl implements LavaAudioService {
     @Getter
     private JdaLavalink lavaLink = null;
 
-    private Set<URI> registeredInstances = Collections.synchronizedSet(new HashSet<>());
+    private final Set<URI> registeredInstances = Collections.synchronizedSet(new HashSet<>());
 
     @Override
     public void configure(DiscordService discordService, DefaultShardManagerBuilder builder) {
@@ -195,7 +195,7 @@ public class DefaultAudioServiceImpl implements LavaAudioService {
             return link.getState() == Link.State.CONNECTED || link.getState() == Link.State.CONNECTING;
         } else {
             AudioManager audioManager = guild.getAudioManager();
-            return audioManager != null && (audioManager.isConnected() || audioManager.isAttemptingToConnect());
+            return audioManager.isConnected();
         }
     }
 

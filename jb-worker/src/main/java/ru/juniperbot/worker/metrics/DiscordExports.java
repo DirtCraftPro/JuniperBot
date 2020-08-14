@@ -16,6 +16,7 @@
  */
 package ru.juniperbot.worker.metrics;
 
+import io.prometheus.client.Collector;
 import io.prometheus.client.dropwizard.samplebuilder.DefaultSampleBuilder;
 import io.prometheus.client.dropwizard.samplebuilder.SampleBuilder;
 import lavalink.client.io.RemoteStats;
@@ -27,7 +28,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
-public class DiscordExports extends io.prometheus.client.Collector implements io.prometheus.client.Collector.Describable {
+public class DiscordExports extends Collector implements Collector.Describable {
 
     private final static String PING_METRIC_NAME = "discord_ping";
 
@@ -43,7 +44,7 @@ public class DiscordExports extends io.prometheus.client.Collector implements io
 
     @Override
     public List<MetricFamilySamples> collect() {
-        Map<String, MetricFamilySamples> mfSamplesMap = new HashMap<String, MetricFamilySamples>();
+        Map<String, MetricFamilySamples> mfSamplesMap = new HashMap<>();
         addToMap(mfSamplesMap, getPingSamples());
         addToMap(mfSamplesMap, getCommandSamples());
         addToMap(mfSamplesMap, getLavaLinkSamples());
@@ -107,7 +108,7 @@ public class DiscordExports extends io.prometheus.client.Collector implements io
             if (currentMfSamples == null) {
                 mfSamplesMap.put(newMfSamples.name, newMfSamples);
             } else {
-                List<MetricFamilySamples.Sample> samples = new ArrayList<MetricFamilySamples.Sample>(currentMfSamples.samples);
+                List<MetricFamilySamples.Sample> samples = new ArrayList<>(currentMfSamples.samples);
                 samples.addAll(newMfSamples.samples);
                 mfSamplesMap.put(newMfSamples.name, new MetricFamilySamples(newMfSamples.name, currentMfSamples.type, currentMfSamples.help, samples));
             }

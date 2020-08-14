@@ -39,7 +39,7 @@ public abstract class BaseEventFilterFactory<T extends Event> implements EventFi
         }
         FilterChainImpl<T> chain = chains.get();
         if (chain == null) {
-            chain = new FilterChainImpl<T>(filterList);
+            chain = new FilterChainImpl<>(filterList);
             chains.set(chain);
         }
         chain.reset();

@@ -45,7 +45,7 @@ public abstract class AbstractJsonSqlTypeDescriptor
     @Override
     public <X> ValueExtractor<X> getExtractor(
             final JavaTypeDescriptor<X> javaTypeDescriptor) {
-        return new BasicExtractor<X>(javaTypeDescriptor, this) {
+        return new BasicExtractor<>(javaTypeDescriptor, this) {
             @Override
             protected X doExtract(
                     ResultSet rs,

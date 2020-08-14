@@ -109,7 +109,6 @@ public class GoonHandler extends ChoiceStateHandler {
         return scheduleEnd(instance, DAY_DELAY);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean onEnd(User user, MafiaInstance instance) {
         if (user != null && !instance.isPlayer(user, MafiaRole.GOON)) {

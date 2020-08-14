@@ -37,7 +37,7 @@ public class JsonBinarySqlTypeDescriptor
     @Override
     public <X> ValueBinder<X> getBinder(
             final JavaTypeDescriptor<X> javaTypeDescriptor) {
-        return new BasicBinder<X>(javaTypeDescriptor, this) {
+        return new BasicBinder<>(javaTypeDescriptor, this) {
             @Override
             protected void doBind(
                     PreparedStatement st,

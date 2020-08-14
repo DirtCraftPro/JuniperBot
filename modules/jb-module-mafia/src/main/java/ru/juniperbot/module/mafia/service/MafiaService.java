@@ -105,7 +105,7 @@ public class MafiaService implements ModuleListener {
     public void stop(MafiaInstance instance) {
         instance.stop();
         instance.setState(MafiaState.FINISH);
-        if (instance.getGuild().isAvailable() && !MafiaInstance.IGNORED_REASON.equals(instance.getEndReason())) {
+        if (!instance.getJda().isUnavailable(instance.getGuildId()) && !MafiaInstance.IGNORED_REASON.equals(instance.getEndReason())) {
             String stopReason = StringUtils.isNotEmpty(instance.getEndReason())
                     ? instance.getEndReason()
                     : messageService.getMessage("mafia.stop.message");

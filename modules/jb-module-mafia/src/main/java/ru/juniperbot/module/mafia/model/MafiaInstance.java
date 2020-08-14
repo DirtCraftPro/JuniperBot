@@ -65,7 +65,7 @@ public class MafiaInstance {
 
     private String endReason;
 
-    private Set<String> listenedMessages = Collections.synchronizedSet(new HashSet<String>());
+    private Set<String> listenedMessages = Collections.synchronizedSet(new HashSet<>());
 
     private Map<MafiaActionType, MafiaPlayer> dailyActions = new ConcurrentHashMap<>();
 

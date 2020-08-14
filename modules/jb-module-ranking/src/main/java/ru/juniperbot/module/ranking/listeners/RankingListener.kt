@@ -17,7 +17,7 @@
 package ru.juniperbot.module.ranking.listeners
 
 import net.dv8tion.jda.api.Permission
-import net.dv8tion.jda.api.events.guild.member.GuildMemberLeaveEvent
+import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent
 import org.springframework.beans.factory.annotation.Autowired
 import ru.juniperbot.common.model.request.RankingUpdateRequest
@@ -35,12 +35,12 @@ class RankingListener : DiscordEventListener() {
     @Autowired
     lateinit var rankingConfigService: RankingConfigService
 
-    override fun onGuildMemberLeave(event: GuildMemberLeaveEvent) {
+    override fun onGuildMemberRemove(event: GuildMemberRemoveEvent) {
         taskExecutor.execute {
             val config = rankingConfigService.getByGuildId(event.guild.idLong)
             if (config != null && config.isResetOnLeave) {
                 rankingConfigService.update(RankingUpdateRequest(event.guild.idLong,
-                        event.member.user.id,
+                        event.member?.user?.id,
                         0,
                         true,
                         true))

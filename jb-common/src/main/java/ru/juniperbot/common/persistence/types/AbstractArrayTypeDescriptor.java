@@ -18,7 +18,6 @@ package ru.juniperbot.common.persistence.types;
 
 import org.hibernate.type.descriptor.WrapperOptions;
 import org.hibernate.type.descriptor.java.AbstractTypeDescriptor;
-import org.hibernate.type.descriptor.java.MutabilityPlan;
 import org.hibernate.type.descriptor.java.MutableMutabilityPlan;
 import org.hibernate.usertype.DynamicParameterizedType;
 import ru.juniperbot.common.utils.ArrayUtil;
@@ -45,11 +44,10 @@ public abstract class AbstractArrayTypeDescriptor<T>
 
     }
 
-    @SuppressWarnings("unchecked")
     public AbstractArrayTypeDescriptor(Class<T> arrayObjectClass) {
         super(
                 arrayObjectClass,
-                (MutabilityPlan<T>) new MutableMutabilityPlan<Object>() {
+                new MutableMutabilityPlan<>() {
                     private static final long serialVersionUID = 5441650086018349126L;
 
                     @Override

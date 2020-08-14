@@ -5,6 +5,7 @@ import org.sweble.wikitext.engine.utils.DefaultConfig;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class WikiFurConfig extends
         DefaultConfig {
@@ -39,7 +40,7 @@ public class WikiFurConfig extends
                 "Media",
                 false,
                 false,
-                Arrays.asList("Медиа")));
+                Collections.singletonList("Медиа")));
 
         c.addNamespace(new NamespaceImpl(
                 -1,
@@ -47,7 +48,7 @@ public class WikiFurConfig extends
                 "Special",
                 false,
                 false,
-                Arrays.asList("Служебная")));
+                Collections.singletonList("Служебная")));
 
         c.addNamespace(new NamespaceImpl(
                 0,
@@ -55,7 +56,7 @@ public class WikiFurConfig extends
                 "",
                 false,
                 false,
-                new ArrayList<String>()));
+                new ArrayList<>()));
 
         c.addNamespace(new NamespaceImpl(
                 1,
@@ -63,7 +64,7 @@ public class WikiFurConfig extends
                 "Talk",
                 false,
                 false,
-                Arrays.asList("Обсуждение")));
+                Collections.singletonList("Обсуждение")));
 
         c.addNamespace(new NamespaceImpl(
                 2,
@@ -71,7 +72,7 @@ public class WikiFurConfig extends
                 "User",
                 false,
                 false,
-                Arrays.asList("Участник")));
+                Collections.singletonList("Участник")));
 
         c.addNamespace(new NamespaceImpl(
                 3,
@@ -79,7 +80,7 @@ public class WikiFurConfig extends
                 "User talk",
                 false,
                 false,
-                Arrays.asList("Обсуждение участника")));
+                Collections.singletonList("Обсуждение участника")));
 
         c.addNamespace(new NamespaceImpl(
                 4,
@@ -87,7 +88,7 @@ public class WikiFurConfig extends
                 "Project",
                 false,
                 false,
-                Arrays.asList("Проект")));
+                Collections.singletonList("Проект")));
 
         c.addNamespace(new NamespaceImpl(
                 5,
@@ -95,7 +96,7 @@ public class WikiFurConfig extends
                 "Project talk",
                 false,
                 false,
-                Arrays.asList("Обсуждение проекта")));
+                Collections.singletonList("Обсуждение проекта")));
 
         c.addNamespace(new NamespaceImpl(
                 6,
@@ -119,7 +120,7 @@ public class WikiFurConfig extends
                 "MediaWiki",
                 false,
                 false,
-                new ArrayList<String>()));
+                new ArrayList<>()));
 
         c.addNamespace(new NamespaceImpl(
                 9,
@@ -127,7 +128,7 @@ public class WikiFurConfig extends
                 "MediaWiki talk",
                 false,
                 false,
-                Arrays.asList("Обсуждение MediaWiki")));
+                Collections.singletonList("Обсуждение MediaWiki")));
 
         c.addNamespace(new NamespaceImpl(
                 10,
@@ -135,7 +136,7 @@ public class WikiFurConfig extends
                 "Template",
                 false,
                 false,
-                Arrays.asList("Шаблон")));
+                Collections.singletonList("Шаблон")));
 
         c.addNamespace(new NamespaceImpl(
                 11,
@@ -143,7 +144,7 @@ public class WikiFurConfig extends
                 "Template talk",
                 false,
                 false,
-                Arrays.asList("Обсуждение шаблона")));
+                Collections.singletonList("Обсуждение шаблона")));
 
         c.addNamespace(new NamespaceImpl(
                 12,
@@ -151,7 +152,7 @@ public class WikiFurConfig extends
                 "Help",
                 false,
                 false,
-                Arrays.asList("Справка")));
+                Collections.singletonList("Справка")));
 
         c.addNamespace(new NamespaceImpl(
                 13,
@@ -159,7 +160,7 @@ public class WikiFurConfig extends
                 "Help talk",
                 false,
                 false,
-                Arrays.asList("Обсуждение справки")));
+                Collections.singletonList("Обсуждение справки")));
 
         c.addNamespace(new NamespaceImpl(
                 14,
@@ -167,7 +168,7 @@ public class WikiFurConfig extends
                 "Category",
                 false,
                 false,
-                Arrays.asList("Категория")));
+                Collections.singletonList("Категория")));
 
         c.addNamespace(new NamespaceImpl(
                 15,
@@ -175,7 +176,7 @@ public class WikiFurConfig extends
                 "Category talk",
                 false,
                 false,
-                Arrays.asList("Обсуждение категории")));
+                Collections.singletonList("Обсуждение категории")));
 
         c.addNamespace(new NamespaceImpl(
                 100,
@@ -183,7 +184,7 @@ public class WikiFurConfig extends
                 "Portal",
                 false,
                 false,
-                Arrays.asList("Портал")));
+                Collections.singletonList("Портал")));
 
         c.addNamespace(new NamespaceImpl(
                 101,
@@ -191,7 +192,7 @@ public class WikiFurConfig extends
                 "Portal talk",
                 false,
                 false,
-                Arrays.asList("Обсуждение портала")));
+                Collections.singletonList("Обсуждение портала")));
 
         c.addNamespace(new NamespaceImpl(
                 108,
@@ -199,7 +200,7 @@ public class WikiFurConfig extends
                 "Book",
                 false,
                 false,
-                Arrays.asList("Книга")));
+                Collections.singletonList("Книга")));
 
         c.addNamespace(new NamespaceImpl(
                 109,
@@ -207,7 +208,7 @@ public class WikiFurConfig extends
                 "Book talk",
                 false,
                 false,
-                Arrays.asList("Обсуждение книги")));
+                Collections.singletonList("Обсуждение книги")));
 
         c.setDefaultNamespace(c.getNamespace(0));
         c.setTemplateNamespace(c.getNamespace(10));
@@ -231,43 +232,43 @@ public class WikiFurConfig extends
         c.addI18nAlias(new I18nAliasImpl(
                 "expr",
                 false,
-                Arrays.asList("#expr:")));
+                Collections.singletonList("#expr:")));
         c.addI18nAlias(new I18nAliasImpl(
                 "if",
                 false,
-                Arrays.asList("#if:")));
+                Collections.singletonList("#if:")));
         c.addI18nAlias(new I18nAliasImpl(
                 "ifeq",
                 false,
-                Arrays.asList("#ifeq:")));
+                Collections.singletonList("#ifeq:")));
         c.addI18nAlias(new I18nAliasImpl(
                 "ifexpr",
                 false,
-                Arrays.asList("#ifexpr:")));
+                Collections.singletonList("#ifexpr:")));
         c.addI18nAlias(new I18nAliasImpl(
                 "iferror",
                 false,
-                Arrays.asList("#iferror:")));
+                Collections.singletonList("#iferror:")));
         c.addI18nAlias(new I18nAliasImpl(
                 "switch",
                 false,
-                Arrays.asList("#switch:")));
+                Collections.singletonList("#switch:")));
         c.addI18nAlias(new I18nAliasImpl(
                 "ifexist",
                 false,
-                Arrays.asList("#ifexist:")));
+                Collections.singletonList("#ifexist:")));
         c.addI18nAlias(new I18nAliasImpl(
                 "time",
                 false,
-                Arrays.asList("#time:")));
+                Collections.singletonList("#time:")));
         c.addI18nAlias(new I18nAliasImpl(
                 "titleparts",
                 false,
-                Arrays.asList("#titleparts:")));
+                Collections.singletonList("#titleparts:")));
         c.addI18nAlias(new I18nAliasImpl(
                 "redirect",
                 false,
-                Arrays.asList("#REDIRECT")));
+                Collections.singletonList("#REDIRECT")));
         c.addI18nAlias(new I18nAliasImpl(
                 "currentmonth",
                 true,
@@ -275,11 +276,11 @@ public class WikiFurConfig extends
         c.addI18nAlias(new I18nAliasImpl(
                 "currentday",
                 true,
-                Arrays.asList("CURRENTDAY")));
+                Collections.singletonList("CURRENTDAY")));
         c.addI18nAlias(new I18nAliasImpl(
                 "currentyear",
                 true,
-                Arrays.asList("CURRENTYEAR")));
+                Collections.singletonList("CURRENTYEAR")));
         c.addI18nAlias(new I18nAliasImpl(
                 "pagename",
                 true,
@@ -295,7 +296,7 @@ public class WikiFurConfig extends
         c.addI18nAlias(new I18nAliasImpl(
                 "talkspace",
                 true,
-                Arrays.asList("TALKSPACE")));
+                Collections.singletonList("TALKSPACE")));
         c.addI18nAlias(new I18nAliasImpl(
                 "subjectspace",
                 true,
@@ -303,15 +304,15 @@ public class WikiFurConfig extends
         c.addI18nAlias(new I18nAliasImpl(
                 "fullpagename",
                 true,
-                Arrays.asList("FULLPAGENAME")));
+                Collections.singletonList("FULLPAGENAME")));
         c.addI18nAlias(new I18nAliasImpl(
                 "fullpagenamee",
                 true,
-                Arrays.asList("FULLPAGENAMEE")));
+                Collections.singletonList("FULLPAGENAMEE")));
         c.addI18nAlias(new I18nAliasImpl(
                 "basepagename",
                 true,
-                Arrays.asList("BASEPAGENAME")));
+                Collections.singletonList("BASEPAGENAME")));
         c.addI18nAlias(new I18nAliasImpl(
                 "talkpagename",
                 true,
@@ -323,39 +324,39 @@ public class WikiFurConfig extends
         c.addI18nAlias(new I18nAliasImpl(
                 "safesubst",
                 false,
-                Arrays.asList("SAFESUBST:")));
+                Collections.singletonList("SAFESUBST:")));
         c.addI18nAlias(new I18nAliasImpl(
                 "sitename",
                 true,
-                Arrays.asList("SITENAME")));
+                Collections.singletonList("SITENAME")));
         c.addI18nAlias(new I18nAliasImpl(
                 "ns",
                 false,
-                Arrays.asList("NS:")));
+                Collections.singletonList("NS:")));
         c.addI18nAlias(new I18nAliasImpl(
                 "fullurl",
                 false,
-                Arrays.asList("FULLURL:")));
+                Collections.singletonList("FULLURL:")));
         c.addI18nAlias(new I18nAliasImpl(
                 "lcfirst",
                 false,
-                Arrays.asList("LCFIRST:")));
+                Collections.singletonList("LCFIRST:")));
         c.addI18nAlias(new I18nAliasImpl(
                 "ucfirst",
                 false,
-                Arrays.asList("UCFIRST:")));
+                Collections.singletonList("UCFIRST:")));
         c.addI18nAlias(new I18nAliasImpl(
                 "lc",
                 false,
-                Arrays.asList("LC:")));
+                Collections.singletonList("LC:")));
         c.addI18nAlias(new I18nAliasImpl(
                 "uc",
                 false,
-                Arrays.asList("UC:")));
+                Collections.singletonList("UC:")));
         c.addI18nAlias(new I18nAliasImpl(
                 "urlencode",
                 false,
-                Arrays.asList("URLENCODE:")));
+                Collections.singletonList("URLENCODE:")));
         c.addI18nAlias(new I18nAliasImpl(
                 "contentlanguage",
                 true,
@@ -363,7 +364,7 @@ public class WikiFurConfig extends
         c.addI18nAlias(new I18nAliasImpl(
                 "padleft",
                 false,
-                Arrays.asList("PADLEFT:")));
+                Collections.singletonList("PADLEFT:")));
         c.addI18nAlias(new I18nAliasImpl(
                 "defaultsort",
                 true,
@@ -371,22 +372,22 @@ public class WikiFurConfig extends
         c.addI18nAlias(new I18nAliasImpl(
                 "filepath",
                 false,
-                Arrays.asList("FILEPATH:")));
+                Collections.singletonList("FILEPATH:")));
         c.addI18nAlias(new I18nAliasImpl(
                 "tag",
                 false,
-                Arrays.asList("#tag:")));
+                Collections.singletonList("#tag:")));
         c.addI18nAlias(new I18nAliasImpl(
                 "protectionlevel",
                 true,
-                Arrays.asList("PROTECTIONLEVEL:")));
+                Collections.singletonList("PROTECTIONLEVEL:")));
         c.addI18nAlias(new I18nAliasImpl(
                 "основная статья",
                 false,
-                Arrays.asList("основная статья|")));
+                Collections.singletonList("основная статья|")));
         c.addI18nAlias(new I18nAliasImpl(
                 "нет статьи",
                 false,
-                Arrays.asList("нет статьи|")));
+                Collections.singletonList("нет статьи|")));
     }
 }

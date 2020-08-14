@@ -24,6 +24,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.exceptions.ErrorResponseException;
+import net.dv8tion.jda.api.requests.ErrorResponse;
 import org.springframework.context.ApplicationContext;
 import ru.juniperbot.common.worker.command.service.InternalCommandsService;
 import ru.juniperbot.common.worker.event.listeners.ReactionsListener;
@@ -98,7 +99,7 @@ public class MessageController {
 
     private boolean cancelled = false;
 
-    private List<CompletableFuture<Void>> reactionFutures = new ArrayList<>();
+    private final List<CompletableFuture<Void>> reactionFutures = new ArrayList<>();
 
     public MessageController(ApplicationContext context, Message message) {
         this.jda = message.getJDA();
@@ -127,7 +128,7 @@ public class MessageController {
             }
 
             reactionsListener.onReactionAdd(message.getId(), event -> {
-                if (!cancelled && !event.getUser().equals(event.getJDA().getSelfUser())) {
+                if (!cancelled && event.getUser() != null && !event.getUser().equals(event.getJDA().getSelfUser())) {
                     String emote = event.getReaction().getReactionEmote().getName();
                     Action action = Action.getForCode(emote);
                     if (action != null) {
@@ -219,7 +220,7 @@ public class MessageController {
             try {
                 if (soft) {
                     cancelled = true;
-                    if (message.getGuild().isAvailable() && message.getGuild().getSelfMember().hasPermission(message.getTextChannel(), Permission.MESSAGE_MANAGE)) {
+                    if (!message.getJDA().isUnavailable(message.getGuild().getIdLong()) && message.getGuild().getSelfMember().hasPermission(message.getTextChannel(), Permission.MESSAGE_MANAGE)) {
                         reactionFutures.forEach(e -> e.cancel(false));
                         message.clearReactions().queue(e -> reactionsListener.unsubscribe(message.getId()));
                     }
@@ -228,12 +229,10 @@ public class MessageController {
                     reactionsListener.unsubscribe(message.getId());
                 }
             } catch (ErrorResponseException e) {
-                switch (e.getErrorResponse()) {
-                    case MISSING_ACCESS:
-                        return;
-                    default:
-                        throw e;
+                if (e.getErrorResponse() == ErrorResponse.MISSING_ACCESS) {
+                    return;
                 }
+                throw e;
             }
         });
     }
